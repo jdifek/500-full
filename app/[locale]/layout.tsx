@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Roboto, Roboto_Condensed, Unbounded } from 'next/font/google'
 import '../globals.css'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
@@ -9,15 +9,21 @@ import Footer from '@/components/Footer'
 import BottomNavigation from '@/components/BottomNavigation'
 import { AuthProvider } from '@/contexts/AuthContext'
 import Script from 'next/script'
+import { Toaster } from 'react-hot-toast'
 
-const geistSans = Geist({
-	variable: '--font-geist-sans',
-	subsets: ['latin'],
+const roboto = Roboto({
+	variable: '--font-roboto',
+	subsets: ['latin', 'cyrillic'],
 })
 
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
-	subsets: ['latin'],
+const robotoCondensed = Roboto_Condensed({
+	variable: '--font-roboto-condensed',
+	subsets: ['latin', 'cyrillic'],
+})
+
+const unbounded = Unbounded({
+	variable: '--font-unbounded',
+	subsets: ['latin', 'cyrillic'],
 })
 
 export const metadata: Metadata = {
@@ -48,19 +54,21 @@ export default async function RootLayout({
 
 	return (
 		<html lang={locale}>
-			<head>
-				<script src="//code.jivo.ru/widget/LzgQISOnC6" async></script>
-			</head>
+			<head></head>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${roboto.variable} ${robotoCondensed.variable} ${unbounded.variable} antialiased`}
 			>
 				<NextIntlClientProvider locale={locale} messages={messages}>
 					<AuthProvider>
 						<Header />
-						<div className='min-h-[60vh] px-3'>{children}</div>
+						<div className='min-h-[60vh] py-6 px-3'>{children}</div>
+						<Toaster position='top-right' />
 						<Footer />
 						<BottomNavigation />
-						<Script src="//code.jivo.ru/widget/LzgQISOnC6" strategy="afterInteractive" />
+						<Script
+							src='//code.jivo.ru/widget/LzgQISOnC6'
+							strategy='afterInteractive'
+						/>
 					</AuthProvider>
 				</NextIntlClientProvider>
 			</body>

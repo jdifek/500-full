@@ -3,8 +3,16 @@ import createNextIntlPlugin from 'next-intl/plugin'
 
 const nextConfig: NextConfig = {
 	images: {
-    domains: ["i.postimg.cc"], // Добавляем разрешенный домен
-  },
+		domains: [
+			'i.postimg.cc',
+			'postimgs.org',
+			'alamocitygolftrail.com',
+			'assets1.ignimgs.com',
+			'seagm-media.seagmcdn.com',
+			// это для аватарок, домен бд, не удалять
+			'etgmohcvgdkvuqnthiuz.supabase.co',
+		],
+	},
 }
 
 const withNextIntl = createNextIntlPlugin()
